@@ -1,16 +1,29 @@
 from selenium import webdriver
 import time
 
-driver = webdriver.Edge(executable_path='C:/Program Files (x86)/msedgedriver.exe')
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
+driver = webdriver.Chrome()
 driver.get('https://google.com')
 driver.maximize_window()
 
-input = driver.find_element('name','q')
-input.send_keys('selenium')
+page_title = driver.title
+
+search_bar = driver.find_element('name', 'q')
+user_input = 'selenium'
+search_bar.send_keys(user_input)
 time.sleep(5)
 
-button = driver.find_element('name','btnK')
+# # Dropdown
+# selection = Select(driver.find_element(By.TAG_NAME,"MYtag"))
+# 
+# selection.select_by_visible_text("Apple")
+
+button = driver.find_element(By.NAME,'btnK')
 button.click()
+
+print(page_title)
 
 driver.back()
 driver.close()
